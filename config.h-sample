@@ -1,0 +1,83 @@
+/* f-dirprecheck Configuration File */
+/* f-dirprecheck--release--1.1 2005-10-30 */
+
+/* Nuked dir prefix, needed for scanning for duplicate uploads */
+#define NUKEPREFIX	"[NUKED] "
+
+/* Amount of days to look back for a duplicate upload */
+#define LOOKBACKDAYS	7
+
+/* Print out debugging lines into ftp status */
+#define DEBUG		0
+
+/* An array of Regular Expressions which is matched against
+  the new dir. Each regex either _has_ to match, or _must_not_
+  match. Otherwise the error message is displayed.
+  All regex matching is done case-insensitively.
+*/
+
+/* to disable regex rules set this to 0 */
+#define USEREGEXLIST	1
+
+/* dont touch the struct, it's for your reference here
+   see README for a long explanation of the fields, or just read the
+   examples below.
+*/	
+enum { REGEX_MUSTMATCH, REGEX_NOTMATCH };
+typedef const struct
+{
+    const char *regex;
+    const char *pathmatch;
+    const char *pathignore;
+    const int matchtype;
+    const char *message;
+} regexentry;
+
+regexentry regexlist[] = {
+    { "-(GRP1|BADCREW|TGSC|ACP|UNF)$",
+      "/site/(0DAY|MP3|MV)/",
+      "/site/(0DAY|MP3|MV)/.groups",
+      REGEX_NOTMATCH,
+      "Nonono. This group is banned. Read rules dumbo." },
+
+    { "-2004-[^-]+$",
+      "/site/(0DAY|MP3|MV)/",
+      "/site/(0DAY|MP3|MV)/.groups",
+      REGEX_MUSTMATCH,
+      "This site only accepts 2004. Read rules dumbo." },
+
+    { "-(FLT|DEViANCE|Razor1911)$",
+      "/site/GAMES/",
+      "/site/GAMES/.groups",
+      REGEX_MUSTMATCH,
+      "We only want quality here." },
+};
+
+/* Cross-section duplicate rls checking:
+   This is to make it impossible to mkdir a release in eg
+   0day and gamerips dir at the same time. or mkdir a pda rls
+   in the 0day section when its already uploaded in the pda section */
+
+typedef const struct
+{
+    const char *cwdregex;
+    const char *checkpath;
+} crosssection;
+
+/* to disable crosssection tests set this to 0 */
+#define CROSSSECTIONTESTS	1
+
+crosssection crosscheck[] = {
+    { "^/site/0DAY/[0-9]{4}",
+      "/site/GAMERiPS/" },
+    { "^/site/0DAY/[0-9]{4}",
+      "/site/TODAY-PDA/" },
+
+    { "^/site/GAMERiPS",
+      "/site/TODAY/" },
+
+    { "^/site/PDA",
+      "/site/TODAY/" },
+};
+
+/* EOC: End of Configuration */

@@ -1,0 +1,70 @@
+README for f-dirprecheck-v1.1
+
+The pre_dir_check script is an essential part of any good glftpd configuration:
+It will check directory names on mkdiring and by blocking stupid attempts keeps
+the site clean.
+
+As a pre_dir_script is run on each mkdir on the ftp site, it must be very fast,
+as to not hinder performance. But at the same time powerful enough to allow
+detailed customization. This is script is a trade-off between the two:
+It has three check stages:
+
+  o  The to-be-mkdired dir must not be in NUKED-XYZ format.
+
+  o  Check the current dated daydir and some days back if a dir of same name or
+     nuked-name exists. This will efficiently _stop_ reuploading of once-nuked
+     dirs.
+     The script supports two day-dir formats YYYY-MM-DD and MMDD. No need for
+     special configing: If the dir in which the mkdir happens is not a daydir
+     of those two format, the backwards checks are skipped.
+
+  o  Third is a set of siteop-specified rules: 
+     Each consists of three regular expressions (see "man 7 regex" if you do
+     not know what this is).
+
+     The first pattern is the most potent. It is matched against the directory
+     which is attempted to mkdir.
+
+     Second one must match the mkdir's parent path. This is used to select which
+     sections the match applies to.
+
+     Third one _must_not_ match the mkdir's parent path. Use this to ignore
+     private dirs or pre dirs.
+     
+     The matchtype-field describes the match's logic: A rule is only taken into
+     account, if the parent path patterns match. Then the mkdir-pattern is
+     applied: depending on the matchtype it either _must_ match, thereby
+     creating an inclusive-check, or it _must_not_ match, thereby creating a
+     ban.
+     
+     Last field is a nice message to display if a match fails.
+
+One function not included in this dirprescript is scanning the dirlog. I found
+this to be too slow if it is big. A backwards-check in the last few days is
+sufficient.
+
+The regular expressions in the rules are tested by the regextest.c program. It
+is not installed. Only there to catch regex-syntax errors before they go live.
+
+Have Fun F
+
+f-dirprecheck--release--1.1 2005-10-30
+
+INSTALLATION GUIDE
+
+For how to config and compile the program see f-README
+
+For glftpd.conf:
+
+pre_dir_check   /bin/f-dirprecheck              *
+
+Changelog:
+
+v1.1
+- Added cross-section checking for multi-section site so that a rls cannot be
+  in uploaded in two sections at once.
+- Prevent mkdir of a directory with the same name as its parent. Deep annoying
+  paths like ABC/ABC/ABC/ cannot be created.
+- Disallow all dirs starting with (incomplete)-.
+- Fixed regextest for NULL regex patterns
+- Added debugging output

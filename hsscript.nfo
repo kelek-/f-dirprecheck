@@ -1,0 +1,59 @@
+            /\                          /\
+   ________/  \_      ______   ________/  \_ 
+   \__    /    /---O--\  __/---\_     /    /
+    |         /    |     \_     /         /        mkdir not war 
+    |___/____/_____|___________/____/____/
+                                          /\                        /\ -poyZ!
+    /\  ___       _________________      /  \   _______   _________/  \
+   /  \/ _/---O---\ _    \__     _/-.   (____)--\   __/___\_    __/    \.---O-
+__/    \_     |     /     /     /    \_/     |     __/     /    \      /    |_
+\_____________|__________/____________/______|____________/_____/\____      _/
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\_______|+
+|                       script and coding section                             |
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+|                                                                             |
+| [D A T E]                                                                   |
+|  2005-10-30                                                                 |
+|                                                                             |
+| [N A M E]                                                                   |
+|  f-dirprecheck                                                              |
+|                                                                             |
+| [V E R S I O N]                                                             |
+|  1.1                                                                        |
+|                                                                             |
+| [F O R]                                                                     |
+|  glftpd, unix, pc, power, room, world, freedom, beer                        |
+|                                                                             |
+| [T E S T E D  O N]                                                          |
+|  glFTPD v1.32                                                               |
+|                                                                             |
+| [C O D E R]                                                                 |
+|  F                                                                          |
+|                                                                             |
+| [I N F O]                                                                   |
+|  An advanced c program for the dir_pre_check hook in glftpd                 |
+|                                                                             |
+| [F E A T U R E S]                                                           |
+|  some hardcoded dummy-nuke-upload checks                                    |
+|  no reuploading of once-nuked dirs                                          |
+|  highly flexible regular expression rules for fine-grain control            |
+|  coded in c for utmost speed                                                |
+|                                                                             |
+| [S Y N T A X]                                                               |
+|  no syntax. used as dir_pre_script                                          |
+|                                                                             |
+| [I N S T A L L]                                                             |
+|  see README and f-README on compiling issues                                |
+|                                                                             |
+| [T O D O]                                                                   |
+|  Maybe add forward-datedir checks                                           |
+|                                                                             |
+| [C O N T A C T]                                                             |
+|  www.high-society.at                                                        |
+|                                                                             |
+| [H I S T O R Y]                                                             |
+| v1.1 : added some much-needed enhancements                                  |
+| v1.0 : public release due to requests                                       |
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+|			       High Society 2004                              |
++-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+

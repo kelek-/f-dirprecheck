@@ -1,0 +1,32 @@
+Generic Config And Compiling Guide for f-scripts written in C
+
+Substitute f-script with the one you are installing.
+(Yes, "script" isn't really the correct word for something written in C)
+
+Every f-script written in C has a config.h-sample included. It must be copied
+to config.h and edited appropriately. This config file is a C-include file and
+therefore has C-syntax (Don't be alarmed if you dont know C, common-sense will
+suffice). All options in config.h are documented there and have reasonable
+defaults, but be warned that no script will run out-of-the-box.
+
+To compile a script use
+# make
+
+and if no compile error are shown use
+# make install
+to install it into the default place in /glftpd/bin.
+
+f-scripts usually do _not_ have external config files that are read on
+script-execution. There are no f-script.confs in /glftpd/bin. All config info
+is compiled into the binary. Therefore if a setting in config.h needs
+adjustment, you have to repeat the install steps. This usually means to "make
+install" after changing config.h.
+
+With zipscript-c I always have the problem of losing the zsconfig.h, so the
+config.h of f-scripts are saved inside the binary itself. It can be retrieved
+with "./f-script dumpconfig" when needed.
+
+Have Fun
+F
+
+f-dirprecheck--release--1.1 2005-10-30
