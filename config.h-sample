@@ -80,4 +80,7 @@ crosssection crosscheck[] = {
       "/site/TODAY/" },
 };
 
+/* to disable redisnukecheck set this to 0 */
+#define REDISNUKECHECK	1
+
 /* EOC: End of Configuration */

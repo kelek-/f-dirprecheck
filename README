@@ -68,3 +68,7 @@ v1.1
 - Disallow all dirs starting with (incomplete)-.
 - Fixed regextest for NULL regex patterns
 - Added debugging output
+
+v1.1.1 ( |k )
+- Added support to check a redis database if a release was already nuked on the site
+- Added import_nuke.c for using it to import the nukelog to a redis database (use glutil -n -print {dir} in conjunction with import_nuke.c)

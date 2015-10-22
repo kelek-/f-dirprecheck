@@ -25,6 +25,10 @@
 #include <regex.h>
 #endif
 
+#if REDISNUKECHECK == 1
+#include <hiredis.h>
+#endif
+
 /* some Limits */
 #define MAXPATH       	260
 
@@ -393,6 +397,41 @@ int main(int argc, char *argv[])
     }
 #endif
 
+#if REDISNUKECHECK == 1
+        redisContext *rConnection;
+        redisReply *rReply;
+        rConnection = redisConnect("127.0.0.1", 6379);
+        if ( rConnection == NULL || rConnection->err) {
+                if (rConnection) {
+                        printf("Connection error to redis server: %s\r\n", rConnection->errstr);
+                } else {
+                        printf("Connection error to redis server: can't allocate redis context\r\n");
+                }
+                return 2;
+        }
+
+
+        /* select redis database */
+        rReply = redisCommand(rConnection, "SELECT 1");
+        freeReplyObject(rReply);
+
+        /* check if release is already in set */
+        rReply = redisCommand(rConnection, "SISMEMBER nuked_release %s", argv[1]);
+        if (rReply->integer > 0) {
+                printf("%s was already nuked.\r\n", argv[1]);
+                /* clean up */
+                freeReplyObject(rReply);
+                redisFree(rConnection);
+
+                return 2;
+        }
+
+        /* clean up */
+        freeReplyObject(rReply);
+        redisFree(rConnection);
+
+
+#endif
 
     /* Nothing found */
     return 0;

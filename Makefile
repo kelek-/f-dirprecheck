@@ -4,7 +4,7 @@
 CONFIG = config.h
 
 CC = gcc
-CFLAGS = -pipe -g -W -Wall -pedantic '-DCONFIG_H="$(CONFIG)"'
+CFLAGS = -pipe -g -W -Wall -pedantic '-DCONFIG_H="$(CONFIG)"' -I /usr/local/include/hiredis -lhiredis 
 
 all: regextest f-dirprecheck
 
